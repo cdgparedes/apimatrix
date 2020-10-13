@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.matrix.tienda.video.prueba.tecnica.clientes.models.entity.Cliente;
@@ -29,17 +28,37 @@ import com.matrix.tienda.video.prueba.tecnica.clientes.services.IClienteService;
 public class ClienteRestController {
 	
 	private static final HttpStatus HttpStatus = null;
+	
 	@Autowired
 	private IClienteService clienteService;
 	
+
+	/**
+	 * Método permite obtener listado  de clientes 
+	 * 
+	 * Entrada :
+	 * 		 No recibe parametros
+	 * @return Lista de Clientes
+	 *
+	 * 	
+	 */
 	@GetMapping("/listaclientes")
-	public List<Cliente> index(){
+	public List<Cliente> listaClientes(){
 		return clienteService.findAll();
 		
 	}
 	
+	/**
+	 * Método permite obtener cliente por id
+	 * 
+	 * Entrada :
+	 * 		 idCliente   Parámetro que contiene  id cliente tipo entero 
+	 * @return cliente Objeto de tipo Cliente con los datos;
+	 * @return código de estado (NOT_FOUND, INTERNAL_SERVER_ERROR, OK)
+	 * 	
+	 */
 	@GetMapping("/listaclientes/{idCliente}")
-	public ResponseEntity<?> show(@PathVariable Long idCliente){
+	public ResponseEntity<?> listaClientePorId(@PathVariable Long idCliente){
 		
 		Map<String,Object> response = new HashMap<>();
 		Cliente cliente = null;
@@ -58,8 +77,19 @@ public class ClienteRestController {
 		
 	}
 	
+
+	/**
+	 * Método que permite crear clientes
+	 * 
+	 * Entrada :
+	 * 		 cliente  objeto de tipo Cliente 
+	 * @return Map con los datos del cliente creado y un mensaje de error ó de exito si se creó bien 
+	 * @return código de estado ( INTERNAL_SERVER_ERROR, CREATED )
+	 * 	
+	 */
+	
 	@PostMapping("/crearclientes")
-	public ResponseEntity<?>  create(@RequestBody Cliente cliente) {
+	public ResponseEntity<?>  crearclientes(@RequestBody Cliente cliente) {
 		
 		Cliente clienteNew = null;
 		Map<String,Object> response = new HashMap<>();
@@ -75,6 +105,19 @@ public class ClienteRestController {
 		return new  ResponseEntity<Map<String,Object>> (response, org.springframework.http.HttpStatus.CREATED);
 	}
 	
+	
+
+	/**
+	 * Método que permite actualizar un  clientes
+	 * 
+	 * Entrada :
+	 * 		 cliente  objeto de tipo Cliente 
+	 * 		 idCliente id del cliente con el que se va actualizar en base de datos 
+	 * 
+	 * @return response Map con los datos del cliente actualiazado y un mensaje de error ó de exito si se actualizo bien 
+	 * @return código de estado (NOT_FOUND, INTERNAL_SERVER_ERROR, CREATED)
+	 * 	
+	 */
 	@PutMapping("/actualizaclientes/{idCliente}")
 	public ResponseEntity<?> udpate(@RequestBody Cliente cliente, @PathVariable Long idCliente) {
 		
@@ -104,7 +147,17 @@ public class ClienteRestController {
 		
 	}
 	
-	
+	/**
+	 * Método que permite eliminar un  clientes
+	 * 
+	 * Entrada :
+	 * 		 
+	 * 		 idCliente id del cliente con el que se va elimar en base de datos 
+	 * 
+	 * @return response Map con los datos del cliente eliminado 
+	 * @return código de estado (INTERNAL_SERVER_ERROR, OK)
+	 * 	
+	 */
 	@DeleteMapping("/borrarcliente/{idCliente}")	
 	public ResponseEntity<?> delete( @PathVariable Long idCliente) {
 		Map<String,Object> response = new HashMap<>();
