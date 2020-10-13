@@ -93,7 +93,7 @@ public class ClienteRestController {
 			clienteActual.setEdad(cliente.getEdad());
 			clienteUpdated= clienteService.save(clienteActual);
 		}catch (DataAccessException e){
-			response.put("mensaje","Error actualizando en  la base de Datos");
+			response.put("mensaje","Error actualizando  la base de Datos");
 			response.put("error",e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
 			return new 	ResponseEntity<Map<String,Object>>(response,org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
 		}
