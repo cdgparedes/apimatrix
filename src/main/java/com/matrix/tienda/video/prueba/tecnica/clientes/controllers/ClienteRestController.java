@@ -27,8 +27,6 @@ import com.matrix.tienda.video.prueba.tecnica.clientes.services.IClienteService;
 @RequestMapping("/cliente")
 public class ClienteRestController {
 	
-	private static final HttpStatus HttpStatus = null;
-	
 	@Autowired
 	private IClienteService clienteService;
 	
@@ -170,7 +168,7 @@ public class ClienteRestController {
 		
 		}
 		
-		response.put("mensaje", "El cliente ha sido eliminado con exito!");
+		response.put("mensaje", "El cliente ha sido eliminado con éxito!");
 		
 		return new ResponseEntity<Map<String,Object>>(response,org.springframework.http.HttpStatus.OK);
 		

@@ -20,27 +20,23 @@ public class JuegoServiceImpl implements IJuegoService{
 	@Override
 	// @Transactional(readOnly = true)
 	public List<Juego> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Juego>) juegoDao.findAll();
 	}
 
 	@Override
 	@Transactional
 	public Juego findById(Long idJuego) {
-		// TODO Auto-generated method stub
 		return juegoDao.findById(idJuego).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public Juego save(Juego juego) {
-		// TODO Auto-generated method stub
 		return juegoDao.save(juego);
 	}
 
 	@Override
 	public void delete(Long idJuego) {
-		// TODO Auto-generated method stub
 		juegoDao.deleteById(idJuego);
 		
 	}
